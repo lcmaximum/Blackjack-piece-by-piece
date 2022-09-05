@@ -1,0 +1,17 @@
+html {
+  max-width: 70ch;
+  padding: 3em 1em;
+  margin: auto;
+  line-height: 1.75;
+  font-size: 1.25em;
+}
+
+.card {
+  height: 75px;
+  width: 50px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 3px;
+  text-align: right;
+  line-height: 1.25;
+}
