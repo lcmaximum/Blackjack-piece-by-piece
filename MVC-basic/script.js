@@ -1,6 +1,6 @@
-//constants
 const dealerSpace = document.getElementById("dealer-space");
 const userSpace = document.getElementById("user-space");
+const msgSpace = document.getElementById("msg-space");
 const scoreboard = document.getElementById("score-board");
 const dealerPoints = document.getElementById("dealer-points");
 const userPoints = document.getElementById("user-points");
@@ -102,6 +102,12 @@ function chooseHit(player) {
   extraCard.textContent = newCard;
   calculateScore();
   displayScore();
+  if (user.score > 15) {
+    toggleVisibility(hitBtn);
+    toggleVisibility(standBtn);
+    toggleVisibility(newRoundBtn);
+    endRound();
+  }
 }
 
 function chooseStand() {
@@ -111,12 +117,38 @@ function chooseStand() {
   while (dealer.score <= 12) {
     chooseHit(dealer);
   }
+  endRound();
+}
+
+function endRound() {
+  determineWinner();
+}
+
+function determineWinner() {
+  let winner = "";
+  if (user.score > 15) {
+    winner = dealer;
+    msgSpace.textContent = "Bust! Dealer wins!";
+  } else if (dealer.score <= 15 && user.score < dealer.score) {
+    winner = dealer;
+    msgSpace.textContent = "Dealer wins!";
+  } else if (dealer.score > 15) {
+    winner = user;
+    msgSpace.textContent = "Bust! You win!";
+  } else if (user.score <= 15 && user.score > dealer.score) {
+    winner = user;
+    msgSpace.textContent = "You win!";
+  } else {
+    msgSpace.textContent = "Push! You're both winners!";
+  }
+  return winner;
 }
 
 function newRound() {
   players.forEach((player) => (player.hand = []));
   players.forEach((player) => (player.score = 0));
   players.forEach((player) => (player.space.innerHTML = ""));
+  msgSpace.textContent = "";
   toggleVisibility(dealBtn);
   toggleVisibility(newRoundBtn);
   toggleVisibility(scoreboard);
