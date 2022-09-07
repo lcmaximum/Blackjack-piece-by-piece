@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="style.css" rel="stylesheet"></link>
     <script defer src="script.js"></script>
-    <title>Static Template</title>
+    <title>Flip A Coin</title>
   </head>
   <body>
     <h1>Heads Or Tails?</h1>
@@ -19,18 +20,21 @@
         placeholder="Amount to bet"
         autocomplete="off"
         style="visibility: visible;"
-      />
-      <button id="set-bet" style="visibility: visible;">Set Bet</button>
+      /><button id="set-bet" style="visibility: visible;">Set Bet</button>
+      <br /><button id="change-bet" style="visibility: hidden;">
+        change bet
+      </button>
+
       <p id="bet-msg-area"></p>
     </div>
 
     <div id="user-choices" style="visibility: hidden;">
       <button id="bet-heads" value="heads">heads</button>
       <button id="bet-tails" value="tails">tails</button>
-      <button id="start-over">start over</button>
     </div>
     <div id="confirmation">
       <div id="confirmation-msg"></div>
+      <div id="outcome-msg"></div>
       <p>
         <button id="flip-coin" style="visibility: hidden;">flip coin</button>
       </p>

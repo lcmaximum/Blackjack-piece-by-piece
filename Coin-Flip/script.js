@@ -6,14 +6,13 @@ const betMsgArea = document.getElementById("bet-msg-area");
 const confMsg = document.getElementById("confirmation-msg");
 const headsBtn = document.getElementById("bet-heads");
 const tailsBtn = document.getElementById("bet-tails");
-const resetBtn = document.getElementById("start-over");
+const changeBetBtn = document.getElementById("change-bet");
 const flipBtn = document.getElementById("flip-coin");
-const result = document.getElementById("result");
+const outcomeMsg = document.getElementById("outcome-msg");
 let userBank = 200;
 let bet = userBet.value;
 let betAmt = parseInt(bet, 10);
 let userChoice = "";
-let coinChoice = "";
 
 userMoney.textContent = "$" + userBank;
 
@@ -37,13 +36,14 @@ function confirmBet() {
     toggleVisibility(setBet);
     betMsgArea.textContent = "Bet set at $" + bet + ". Choose heads or tails.";
     toggleVisibility(userChoices);
+    toggleVisibility(changeBetBtn);
   }
 }
 
 function confirmHeads() {
   userChoice = "heads";
   headsBtn.style.border = "3px solid";
-  toggleVisibility(tailsBtn);
+
   confMsg.textContent = "Flip coin to bet $" + bet + " on heads.";
   toggleVisibility(flipBtn);
 }
@@ -51,7 +51,7 @@ function confirmHeads() {
 function confirmTails() {
   userChoice = "tails";
   tailsBtn.style.border = "3px solid";
-  toggleVisibility(headsBtn);
+
   confMsg.textContent = "Flip coin to bet $" + bet + " on tails.";
   toggleVisibility(flipBtn);
 }
@@ -69,19 +69,31 @@ function flipCoin() {
 }
 
 function findOutcome(o) {
-  let outcomeMsg = "";
+  let outcome = "";
   if (o === userChoice) {
-    outcomeMsg = "Cha-ching!";
+    outcome = "Cha-ching!";
     userBank += betAmt;
   } else {
     userBank -= betAmt;
-    outcomeMsg = "Tough break!";
+    outcome = "Tough break!";
   }
   userMoney.textContent = "$" + userBank;
-  betMsgArea.textContent = outcomeMsg;
+  outcomeMsg.textContent = outcome;
+}
+
+function changeBet() {
+  toggleVisibility(userBet);
+  toggleVisibility(setBet);
+  userBet.value = "";
+
+  toggleVisibility(userChoices);
+  toggleVisibility(changeBetBtn);
+  betMsgArea.textContent = "";
+  confMsg.textContent = "";
 }
 
 setBet.addEventListener("click", confirmBet);
 headsBtn.addEventListener("click", confirmHeads);
 tailsBtn.addEventListener("click", confirmTails);
 flipBtn.addEventListener("click", flipCoin);
+changeBetBtn.addEventListener("click", changeBet);
