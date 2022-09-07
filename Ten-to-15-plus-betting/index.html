@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+   
+    <script defer src="script.js"></script>
+    <link href="style.css" rel="stylesheet"></link>
+
+    <title>10 to 15, with betting</title>
+  </head>
+  <body>
+
+      <div id="bank">
+          <h3>Your bank: <span id="user-money"></span></h3>
+
+          <input
+            id="user-bet"
+            placeholder="Amount to bet"
+            autocomplete="off"
+            style="visibility: visible;"
+          /><button id="set-bet" style="visibility: visible;">Set Bet</button>
+          <br /><button id="change-bet" style="visibility: hidden;">
+            change bet
+          </button>
+    
+          <p id="bet-msg-area"></p>
+        </div>
+
+        <div id="confirmation">
+          <div id="confirmation-msg"></div>
+          <div id="outcome-msg"></div>
+     
+          
+        </div>
+
+
+
+
+    <div id='score-board' style="visibility:hidden">
+      <div id='dealer-score'>Dealer: <span id='dealer-points'>0</span></div>
+      <div id='user-score'>You: <span id='user-points'>0</span></div>
+    </div>
+<div id="msg-space"></div>
+<div id='dealer-space' class='player-div'>
+
+</div>
+
+<div id='user-space' class='player-div'>
+
+</div>
+
+<div id='control-panel'>
+  <button id='deal-btn' style="visibility:hidden">Deal</button>
+  <button id='hit-btn' style='visibility:hidden'>Hit</button>
+  <button id='stand-btn' style='visibility:hidden'>Stand</button>
+  <button id='new-round-btn' style='visibility:hidden'>New Round</button>
+</div>
+
+<p>It's time to start putting the pieces together! Here, the basic game logic from 'Ten to 15'
+    replaces the game logic from Coin Flip, and after many rounds of play (and way too many losses
+    for a game i designed myself!) we have a working, if not super-fun or stylish, game of betting and chance.
+</p>
+<p>About style: I'm aware that these projects have, as they say, zero drip. I've found it way too
+    easy to fall down a CSS rabbit hole when I should be focusing on my app's functionality - only to emerge hours later
+    with a page that looks like I made it in MS Paint.  So for my practice projects, I'm keeping styling
+    to a minimum. That said, I definitely want to shout out 100 Bytes To Make Your Page Not Shit 
+    (i will put a real link here). It's just enough design to look intentional, and just these few lines
+    contain a whole lot of CSS wisdom.
+</p>
+  </body>
+</html>
