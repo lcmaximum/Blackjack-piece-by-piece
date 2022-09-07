@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script defer src="script.js"></script>
+    <title>Static Template</title>
+  </head>
+  <body>
+    <h1>Heads Or Tails?</h1>
+
+    <div id="bank">
+      <h3>Your bank: <span id="user-money"></span></h3>
+    </div>
+    <div id="betting-amount">
+      <input
+        id="user-bet"
+        placeholder="Amount to bet"
+        autocomplete="off"
+        style="visibility: visible;"
+      />
+      <button id="set-bet" style="visibility: visible;">Set Bet</button>
+      <p id="bet-msg-area"></p>
+    </div>
+
+    <div id="user-choices" style="visibility: hidden;">
+      <button id="bet-heads" value="heads">heads</button>
+      <button id="bet-tails" value="tails">tails</button>
+      <button id="start-over">start over</button>
+    </div>
+    <div id="confirmation">
+      <div id="confirmation-msg"></div>
+      <p>
+        <button id="flip-coin" style="visibility: hidden;">flip coin</button>
+      </p>
+      <p id="result"></p>
+    </div>
+
+    <p>
+      Trying to add betting to my Blackjack assignment ate up a lot of time
+      before i gave up and handed in "No-Stakes Blackjack". Returning to the
+      game after graduating by the skin of my teeth, I made multiple attempts to
+      add bank & betting on top of the 'finished' product, only to have it wreak
+      havoc on scoring and layout. Subsequent attempts at debugging just made a
+      bigger mess (much like Homer visiting the past in Treehouse of Horror.)
+    </p>
+    <p>
+      I realized if I was going to figure out betting logic, it had to be
+      isolated from the complexity of potential Blackjack outcomes. I went with
+      the simplest game of chance possible - a coin flip - and focused on the
+      logic of "guess right, add money, guess wrong, subtract money."
+    </p>
+    <p>
+      Taking it back to basics helped me better understand the separation of
+      interests in game logic - in an earlier attempt, i was defining all 5
+      possible Blackjack outcomes, adding or subtracting from the bank, and
+      updating the DOM all within the same function. Of course I couldn't change
+      one thing without breaking another!
+    </p>
+    <p>
+      Even in this little 2-outcome game, my code has room for improvement. For
+      example, I ended up defining two separate callback functions (confirmHeads
+      and confirmTails) rather than using event delegation to simply
+      'confirmUserChoice'. With only two outcomes, it seemed like more work than
+      it was worth, but in future projects, I'll need a better understanding of
+      event delegation.
+    </p>
+  </body>
+</html>
