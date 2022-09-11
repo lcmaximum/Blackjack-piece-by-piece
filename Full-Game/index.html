@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+   
+    <script defer src="script.js"></script>
+    <link href="style.css" rel="stylesheet"></link>
+
+    <title>Full game logic</title>
+  </head>
+  <body>
+
+      <div id="bank">
+          <h4>Your bank: <span id="user-money"></span></h4>
+          <p id="bet-msg-area">
+</p>          <button id="change-bet" style="visibility: hidden;">
+            change bet
+          </button>
+          <p><input
+            id="user-bet"
+            placeholder="Amount to bet"
+            autocomplete="off"
+            style="visibility: visible;"
+          /><button id="set-bet" style="visibility: visible;">Set Bet</button>
+          </p>
+    
+
+        </div>
+
+        <div id="confirmation">
+          <div id="confirmation-msg"></div>
+          <div id="outcome-msg"></div></div>
+     <div id='gameplay' style='visibility:hidden'>
+          <div id='score-board' style='visibility:hidden'>
+            <div id='dealer-score'>Dealer: <span id='dealer-points'>0</span></div>
+            <div id='user-score'>You: <span id='user-points'>0</span></div>
+          </div>
+      <div id="msg-space"></div>
+      <div id='dealer-space' class='player-div'>
+    
+      </div>
+      
+      <div id='user-space' class='player-div'>
+      
+      </div>
+      
+      <div id='control-panel'>
+        <button id='deal-btn' class='play-btn'>Deal</button>
+        <button id='hit-btn' class='play-btn'>Hit</button>
+        <button id='stand-btn' class='play-btn'>Stand</button>
+        <button id='new-round-btn' class='play-btn'>New Round</button>
+      </div>
+        </div>
+
+<div class='lc-final-thots'><p>It works! It works!!!!! On top of combining betting logic, game logic, 
+  and simple CSS, I was able to make a few extra improvements to the game overall:
+</p>
+<ul><li>The dealer's facedown card now shows up in every round!</li>
+  <li>The dealer's facedown card no longer reveals the card's color while facedown!</li>
+  <li>Aces finally have variable scoring that works!</li></ul>
+
+<p>Although the styling leaves quite a bit to be desired, I'm forcing myself to leave this leg of the project as-is. 
+For the next iteration, I will have to get more comfortable with CSS frameworks, icon libraries, and animation, 
+just to name a few items. On top of that, I'd love to incorporate ace-splitting, bet-doubling, and special graphics for when 
+a player actually gets Blackjack. 
+</p>
+</div>
+
+
+  </body>
+</html>

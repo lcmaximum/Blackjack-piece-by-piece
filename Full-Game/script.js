@@ -1,6 +1,71 @@
+const setBet = document.getElementById("set-bet");
+const userMoney = document.getElementById("user-money");
+const userBet = document.getElementById("user-bet");
+const betMsgArea = document.getElementById("bet-msg-area");
+const confMsg = document.getElementById("confirmation-msg");
+const gameplay = document.getElementById("gameplay");
+const changeBetBtn = document.getElementById("change-bet");
+const msgSpace = document.getElementById("msg-space");
+let userBank = 200;
+let bet = userBet.value;
+let betAmt = parseInt(bet, 10);
+
+userMoney.textContent = "$" + userBank;
+
+/*function toggleVisibility(e) {
+  if (e.style.visibility === "hidden") {
+    e.style.visibility = "visible";
+  } else {
+    e.style.visibility = "hidden";
+  }
+}*/
+
+function toggleVisibility(e) {
+  if (e.style.visibility === "visible") {
+    e.style.visibility = "hidden";
+  } else {
+    e.style.visibility = "visible";
+  }
+}
+
+function confirmBet() {
+  bet = userBet.value;
+  betAmt = parseInt(bet, 10);
+  if (betAmt > userBank) {
+    betMsgArea.style.color = "red";
+    betMsgArea.style.fontWeight = "700";
+    betMsgArea.textContent = "Please place a bet up to $" + userBank;
+  } else {
+    betMsgArea.style.color = "goldenrod";
+    betMsgArea.style.fontWeight = "500";
+    toggleVisibility(userBet);
+    toggleVisibility(setBet);
+    betMsgArea.textContent = "Bet set at $" + bet + ".";
+    msgSpace.textContent = "Press Deal to begin.";
+    toggleVisibility(changeBetBtn);
+    toggleVisibility(gameplay);
+    dealBtn.style.visibility = "visible";
+  }
+}
+
+function changeBet() {
+  newRound();
+  dealerPoints.textContent = dealer.score;
+  userPoints.textContent = user.score;
+  toggleVisibility(userBet);
+  toggleVisibility(setBet);
+  userBet.value = "";
+  toggleVisibility(changeBetBtn);
+  betMsgArea.textContent = "";
+  confMsg.textContent = "";
+}
+
+setBet.addEventListener("click", confirmBet);
+changeBetBtn.addEventListener("click", changeBet);
+
 const dealerSpace = document.getElementById("dealer-space");
 const userSpace = document.getElementById("user-space");
-const msgSpace = document.getElementById("msg-space");
+
 const scoreboard = document.getElementById("score-board");
 const dealerPoints = document.getElementById("dealer-points");
 const userPoints = document.getElementById("user-points");
@@ -8,7 +73,7 @@ const dealBtn = document.getElementById("deal-btn");
 const hitBtn = document.getElementById("hit-btn");
 const standBtn = document.getElementById("stand-btn");
 const newRoundBtn = document.getElementById("new-round-btn");
-let mysteryCardDiv = document.createElement("div");
+const mysteryCardDiv = document.createElement("div");
 
 const clubs2 = ["clubs", "♣", "2", 2, false];
 const clubs3 = ["clubs", "♣", "3", 3, false];
@@ -147,23 +212,17 @@ const players = [user, dealer];
 let deck = [];
 
 //functions
-function toggleVisibility(e) {
-  if (e.style.visibility === "visible") {
-    e.style.visibility = "hidden";
-  } else {
-    e.style.visibility = "visible";
-  }
-}
 
 function shuffle() {
   deck = [];
   while (deck.length < 52) {
     let num = Math.floor(Math.random() * 52);
     if (!deck.includes(fullDeck[num])) {
+      console.log(num, fullDeck[num]);
       deck.push(fullDeck[num]);
     }
   }
-
+  console.log(deck);
   return deck;
 }
 
@@ -181,15 +240,15 @@ function calculateScore() {
   user.score = 0;
   for (let i = 0; i < dealer.hand.length; i++) {
     dealer.score += dealer.hand[i][3];
-    if (containsAce(dealer.hand) && dealer.score > 21) {
-      dealer.score -= 10;
-    }
+  }
+  if (containsAce(dealer.hand) && dealer.score > 21) {
+    dealer.score -= 10;
   }
   for (let i = 0; i < user.hand.length; i++) {
     user.score += user.hand[i][3];
-    if (containsAce(user.hand) && user.score > 21) {
-      user.score -= 10;
-    }
+  }
+  if (containsAce(user.hand) && user.score > 21) {
+    user.score -= 10;
   }
 }
 
@@ -210,6 +269,12 @@ function displayScore() {
 }
 
 function dealFirstRound() {
+  dealer.space.appendChild(mysteryCardDiv);
+  mysteryCardDiv.style.color = "black";
+  mysteryCardDiv.classList.add("card");
+  mysteryCardDiv.textContent = "???";
+  msgSpace.textContent =
+    "Press Hit to draw another card or Stand to end your turn.";
   console.log("1");
   shuffle();
   console.log("2");
@@ -239,11 +304,6 @@ function dealFirstRound() {
 
   secretDealerCard = deck.pop();
 
-  dealer.space.appendChild(mysteryCardDiv);
-  mysteryCardDiv.classList.add("card");
-  console.log(mysteryCardDiv.classList);
-  mysteryCardDiv.textContent = "???";
-
   calculateScore();
   displayScore();
 
@@ -259,10 +319,14 @@ function chooseHit(player) {
   calculateScore();
   displayScore();
   if (user.score > 21) {
-    displayCard(secretDealerCard, mysteryCardDiv);
     toggleVisibility(hitBtn);
     toggleVisibility(standBtn);
-    toggleVisibility(newRoundBtn);
+    dealer.hand.push(secretDealerCard);
+    displayCard(secretDealerCard, mysteryCardDiv);
+    if (isRed(secretDealerCard)) {
+      mysteryCardDiv.style.color = "red";
+      mysteryCardDiv.style.border = "solid black";
+    }
     endRound();
   }
 }
@@ -270,10 +334,14 @@ function chooseHit(player) {
 function chooseStand() {
   toggleVisibility(hitBtn);
   toggleVisibility(standBtn);
-  toggleVisibility(newRoundBtn);
+
   dealer.hand.push(secretDealerCard);
   displayCard(secretDealerCard, mysteryCardDiv);
-  while (dealer.score <= 15) {
+  if (isRed(secretDealerCard)) {
+    mysteryCardDiv.style.color = "red";
+    mysteryCardDiv.style.border = "solid black";
+  }
+  while (dealer.score <= 16) {
     chooseHit(dealer);
   }
   endRound();
@@ -281,6 +349,7 @@ function chooseStand() {
 
 function endRound() {
   determineWinner();
+  newRoundBtn.style.visibility = "visible";
 }
 
 function determineWinner() {
@@ -300,17 +369,29 @@ function determineWinner() {
   } else {
     msgSpace.textContent = "Push! You're both winners!";
   }
-  return winner;
+  return findOutcome(winner);
+}
+
+function findOutcome(o) {
+  if (o === user) {
+    userBank += betAmt;
+  } else if (o === dealer) {
+    userBank -= betAmt;
+  }
+  userMoney.textContent = "$" + userBank;
 }
 
 function newRound() {
   players.forEach((player) => (player.hand = []));
   players.forEach((player) => (player.score = 0));
   players.forEach((player) => (player.space.innerHTML = ""));
-  msgSpace.textContent = "";
-  toggleVisibility(dealBtn);
+  msgSpace.textContent =
+    "Press Deal to begin a new round or Change Bet to adjust your bet.";
+  userPoints.textContent = "0";
+  dealerPoints.textContent = "0";
   toggleVisibility(newRoundBtn);
   toggleVisibility(scoreboard);
+  toggleVisibility(dealBtn);
 }
 
 //event listeners

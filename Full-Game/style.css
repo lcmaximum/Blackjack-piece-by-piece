@@ -1,0 +1,87 @@
+html {
+    max-width: 70ch;
+    padding: 3em 1em;
+    margin: auto;
+    line-height: 1.75;
+    font-size: 1.25em;
+    font-family: sans-serif;
+  }
+  
+  .card {
+    height: 75px;
+    width: 50px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 3px;
+    text-align: right;
+    line-height: 1.25;
+    margin: 1%;
+    background-color: white;
+  }
+  
+  .player-div {
+    min-height: 150px;
+    border: solid;
+    display: flex;
+    background-color: green;
+  }
+  
+  #deal-btn {
+    border: 3px solid green;
+  }
+  
+  #hit-btn {
+    border: 3px solid magenta;
+  }
+  
+  #stand-btn {
+    border: 3px solid cornflowerblue;
+  }
+  
+  #new-round-btn {
+    border: 3px solid darkblue;
+  }
+  
+  .play-btn {
+    min-height: 50px;
+    min-width: 75px;
+  }
+  
+  .play-btn:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 50px;
+    min-height: 25px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  input {
+    border-radius: 8px;
+    font-size: 1.05em;
+    text-align: center;
+  }
+  
+  #bank {
+    background-color: rgb(136, 13, 13);
+    color: rgb(233, 194, 95);
+    padding-left: 15px;
+  }
+  
+  #bet-msg-area {
+    font-size: 22px;
+    color: goldenrod;
+  }
+  
+  #score-board {
+    border: solid;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  
